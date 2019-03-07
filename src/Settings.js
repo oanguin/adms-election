@@ -9,10 +9,8 @@ import Button from '@material-ui/core/Button';
 class Settings extends Component{
     constructor(props){
         super(props);
-        this.state = { Neo4JUrl: props.Neo4JUrl,User: props.User, Password:props.Password }
-        this.UpdateNeo4JSettings = this.UpdateNeo4JSettings.bind(this);
-        const graphClient = new GraphClient();
-
+        this.state = { Neo4JUrl: props.Neo4JUrl,User: props.User, Password:props.Password }               
+        
         /*graphClient.GetAllUkParties().then(result => {
             session.close();
     
@@ -23,10 +21,9 @@ class Settings extends Component{
 
     }
 
-    UpdateNeo4JSettings = () =>{
-        console.log('Settings');
-        const {Neo4JUrl, User, Password} = this.state;
-        this.props.UpdateNeo4Settings(Neo4JUrl, User, Password);
+    UpdateNeo4JSettings = () =>{        
+        const {Neo4JUrl, User, Password} = this.state;        
+        GraphClient.UpdateSettings(Neo4JUrl, User, Password);
     }
 
     render(){

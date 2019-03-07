@@ -19,6 +19,7 @@ import SimpleLineChart from './SimpleLineChart';
 import SimpleTable from './SimpleTable';
 import Settings from './Settings';
 import AppScss from './App.scss'
+import GraphClient from './GraphClient';
 
 const drawerWidth = 240;
 
@@ -119,10 +120,6 @@ class Dashboard extends React.Component {
     this.setState({currentMenuItem:currentMenuItem })
   };
 
-  UpdateNeo4Settings = (newUrl, newUser, newPassword) =>{
-    console.log(newUrl, newUser, newPassword);
-  }
-
   render() {
     const { classes } = this.props;
     var SettingsClass = classNames({
@@ -184,7 +181,7 @@ class Dashboard extends React.Component {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <div className={SettingsClass}>
-                <Settings className={classes.content} Neo4JUrl={"bolt://localhost:7687"} User={"neo4j"} Password={"123456"} UpdateNeo4Settings={this.UpdateNeo4Settings}/>
+                <Settings className={classes.content} Neo4JUrl={"bolt://localhost:7687"} User={"neo4j"} Password={"123456"}/>
             </div>
         </main>
       </div>
