@@ -1,17 +1,71 @@
 import React, { Component } from 'react';
 import './App.css';
+import { v1 as neo4j } from 'neo4j-driver';
+import GraphClient from './GraphClient'
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 
 class Settings extends Component{
     constructor(props){
         super(props);
+        this.state = { Neo4JUrl: props.Neo4JUrl,User: props.User, Password:props.Password }
+        this.UpdateNeo4JSettings = this.UpdateNeo4JSettings.bind(this);
+        const graphClient = new GraphClient();
+
+        /*graphClient.GetAllUkParties().then(result => {
+            session.close();
+    
+            const singleRecord = result.records[0];
+            const node = singleRecord.get(0);
+            console.log(node.properties);
+        });*/
+
+    }
+
+    UpdateNeo4JSettings = () =>{
+        console.log('Settings');
+        const {Neo4JUrl, User, Password} = this.state;
+        this.props.UpdateNeo4Settings(Neo4JUrl, User, Password);
     }
 
     render(){
-        const {Neo4JUrl, UpdateNeo4JUrl} = this.props;
+        const {Neo4JUrl, User, Password} = this.props;
         return(
-            <div>
-                <input type="text" bind={Neo4JUrl} value={Neo4JUrl} onChange={UpdateNeo4JUrl.bind(this)}/>
-            </div>
+            <form  noValidate autoComplete="off">
+                    <TextField
+                    required
+                    id="url"
+                    label="Required"
+                    defaultValue="bolt://localhost:7687"
+                    margin="normal"
+                    onChange={e => this.setState({ Neo4JUrl: e.target.value })}
+                    />
+                    <br/>
+                    <TextField
+                    required
+                    id="user"
+                    label="Required"
+                    defaultValue="neo4j"
+                    margin="normal"
+                    onChange={e => this.setState({ User: e.target.value })}
+                    />
+                    <br/>
+                    <TextField
+                    id="standard-password-input"
+                    label="Password"
+                    type="password"
+                    autoComplete="current-password"
+                    defaultValue="123456"
+                    margin="normal"
+                    onChange={e => this.setState({ Password: e.target.value })}
+                    />
+                    <br/>
+                    <Button variant="contained" color="primary" onClick={this.UpdateNeo4JSettings}>
+                        Save Settings
+                    </Button>
+                
+            </form>
         );
     }
 }

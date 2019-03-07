@@ -102,7 +102,6 @@ const styles = theme => ({
 class Dashboard extends React.Component {
   state = {
     open: true,
-    currentMenuItem: 1
   };
 
   handleDrawerOpen = () => {
@@ -183,9 +182,21 @@ class Dashboard extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <div className={SettingsClass}>
+          <Typography variant="h4" gutterBottom component="h2">
+            Orders
+          </Typography>
+          <Typography component="div" className={classes.chartContainer}>
+            <SimpleLineChart />
+          </Typography>
+          <Typography variant="h4" gutterBottom component="h2">
+            Products
+          </Typography>
+          <div className={classes.tableContainer}>
+            <SimpleTable />
+            <div className={SettingsClass}>
                 <Settings className={classes.content} Neo4JUrl={"bolt://localhost:7687"} User={"neo4j"} Password={"123456"} UpdateNeo4Settings={this.UpdateNeo4Settings}/>
             </div>
+          </div>
         </main>
       </div>
     );
