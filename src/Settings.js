@@ -10,7 +10,6 @@ class Settings extends Component{
     constructor(props){
         super(props);
         this.state = { Neo4JUrl: props.Neo4JUrl,User: props.User, Password:props.Password }               
-        
         /*graphClient.GetAllUkParties().then(result => {
             session.close();
     
@@ -53,7 +52,7 @@ class Settings extends Component{
                     label="Password"
                     type="password"
                     autoComplete="current-password"
-                    defaultValue="123456"
+                    defaultValue="neo4jpass"
                     margin="normal"
                     onChange={e => this.setState({ Password: e.target.value })}
                     />

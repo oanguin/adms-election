@@ -5,7 +5,7 @@ class GraphClient{
     constructor(){
         this.url = "bolt://localhost:7687";
         this.user = "neo4j";
-        this.password = "123456";
+        this.password = "neo4jpass";
         this.CreateDriver();
     }
 
@@ -30,6 +30,21 @@ class GraphClient{
         return this.session.run(
             'MATCH (p:Ukparty) RETURN p'
             );
+    }
+
+    GetAllUkAreas = () => {
+        return this.session.run(
+            'MATCH (c:Ukconst) RETURN DISTINCT c.ukarea ORDER BY c.ukarea'
+        );
+    }
+
+    GetPartWithMostVotesInArea = (ukarea) =>{
+        return this.session.run(
+            `MATCH (ukc:Ukconst{ukarea:"${ukarea}"})-[result:Ukresult]->(ukp:Ukparty) with max(result.ukvotes) ` +
+            `as maxvotes MATCH (ukc:Ukconst{ukarea:"${ukarea}"})-[result:Ukresult]->(ukp:Ukparty) ` +
+            `WHERE maxvotes = result.ukvotes RETURN ukp`
+        );
+        
     }
 }
 

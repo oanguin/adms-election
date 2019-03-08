@@ -20,6 +20,7 @@ import SimpleTable from './SimpleTable';
 import Settings from './Settings';
 import AppScss from './App.scss'
 import GraphClient from './GraphClient';
+import Question1 from './Question1';
 
 const drawerWidth = 240;
 
@@ -126,6 +127,10 @@ class Dashboard extends React.Component {
         'visible': this.state.currentMenuItem === 1,
         'hidden': this.state.currentMenuItem !== 1
       });
+    var Question1Class = classNames({
+        'visible': this.state.currentMenuItem === 2,
+        'hidden': this.state.currentMenuItem !== 2
+      });
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -181,8 +186,11 @@ class Dashboard extends React.Component {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <div className={SettingsClass}>
-                <Settings className={classes.content} Neo4JUrl={"bolt://localhost:7687"} User={"neo4j"} Password={"123456"}/>
-            </div>
+                <Settings className={classes.content} Neo4JUrl={"bolt://localhost:7687"} User={"neo4j"} Password={"neo4jpass"}/>
+          </div>
+          <div className={Question1Class}>
+            <Question1/>
+          </div>
         </main>
       </div>
     );
