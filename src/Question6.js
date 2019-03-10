@@ -12,32 +12,35 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-class Question4 extends Component{
+class Question6 extends Component{
     constructor(props){
         super(props);
-        this.state = { parties: []};
+        this.state = {results:[]};
     }
 
     componentDidMount(){
         this.props.setActiveStatus(true);
-        GraphClient.GetPartiesWhomContested().then(          
+        GraphClient.GetAllWhomHaveLostDeposit().then(
             result =>{
-                this.setState({parties:result.records},this.props.setActiveStatus(false))
+                this.setState({results:result.records},this.props.setActiveStatus(false));
             }
         )
     }
 
+
     render(){
-        const {parties} = this.state;
+        const {results} = this.state;
         return(        
             <div>
-                <h1>Question 4</h1>
-                <h2><i>Parties Whom Contested the election and the votes they recived.</i></h2>
+                <h1>Question 6</h1>
+                <h2><i>All parties whom have lost their deposts in a particular constituency.</i></h2>
+
                 {
-                    (parties && parties.length > 0) ?
-                    <PartiesDiv parties={parties}/>
+                    (results && results.length > 0) ?
+                    <PartiesDiv parties={results}/>
                     :<div className="resultsDiv"><h2>Sorry No Results</h2></div>
                 }
+
             </div>
             )
     }
@@ -52,16 +55,18 @@ function PartiesDiv(props){
             <TableHead>
             <TableRow>
                 <TableCell>Party</TableCell>
-                <TableCell align="right">Votes</TableCell>
+                <TableCell align="left">Area</TableCell>
+                <TableCell align="left">Percent of Votes</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
-            {parties.map(party => (
-                <TableRow key={party.get('party')}>
+            {parties.map((party,index) => (
+                <TableRow key={index}>
                 <TableCell component="th" scope="row">
                     {party.get('party')}
                 </TableCell>
-                <TableCell align="right">{party.get('seatswon').low}</TableCell>
+                <TableCell align="left">{party.get('area')}</TableCell>
+                <TableCell align="left">{party.get('percentofvotes')}</TableCell>
                 </TableRow>
             ))}
             </TableBody>
@@ -71,4 +76,4 @@ function PartiesDiv(props){
     )
 }
 
-export default Question4;
+export default Question6;

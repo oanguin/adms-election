@@ -44,6 +44,18 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Question 4" data-index="5"/>
     </ListItem>
+    <ListItem button data-index="6">
+      <ListItemIcon data-index="6">
+        <QuestionAnswerSharp data-index="6"/>
+      </ListItemIcon>
+      <ListItemText primary="Question 5" data-index="6"/>
+    </ListItem>
+    <ListItem button data-index="7">
+      <ListItemIcon data-index="7">
+        <QuestionAnswerSharp data-index="7"/>
+      </ListItemIcon>
+      <ListItemText primary="Question 6" data-index="7"/>
+    </ListItem>
   </div>
 );
 

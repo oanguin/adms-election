@@ -14,14 +14,18 @@ class Question1 extends Component{
     }
 
     componentDidMount(){
+        this.props.setActiveStatus(true);
         GraphClient.GetAllUkAreas().then(
             result =>{
-                this.setState({constituencies:result.records});
+                this.setState({constituencies:result.records}, () =>{
+                    this.props.setActiveStatus(false);
+                });
             }
         )
     }
 
     handleChange = event => {
+        this.props.setActiveStatus(true);
         this.setState({ [event.target.name]: event.target.value }, () =>{
             this.GetPartyWithMostVotes();
         });
@@ -30,13 +34,10 @@ class Question1 extends Component{
 
     GetPartyWithMostVotes = () =>{
         const {ukarea} = this.state;
-        console.log(ukarea)
         GraphClient.GetPartyWithMostVotesInArea(ukarea).then(
             result =>{
                 if( result.records[0]){
-                    //this.state.winningParty = result.records[0].get('ukp');
-                    this.setState({ winningParty: result.records[0].get('ukp')});
-                    console.log("Winner",this.state.winningParty)
+                    this.setState({ winningParty: result.records[0].get('ukp')},this.props.setActiveStatus(false));
                 }
                 
             }

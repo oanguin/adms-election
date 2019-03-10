@@ -10,20 +10,18 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
-import SimpleLineChart from './SimpleLineChart';
-import SimpleTable from './SimpleTable';
 import Settings from './Settings';
-import AppScss from './App.scss'
-import GraphClient from './GraphClient';
 import Question1 from './Question1';
 import Question2 from './Question2';
 import Question3 from './Question3';
 import Question4 from './Question4';
+import Question5 from './Question5';
+import Question6 from './Question6';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import AppScss from './App.scss';
 
 const drawerWidth = 240;
 
@@ -107,7 +105,8 @@ const styles = theme => ({
 class Dashboard extends React.Component {
   state = {
     open: true,
-    currentMenuItem: 1
+    currentMenuItem: 1,
+    active: true
   };
 
   handleDrawerOpen = () => {
@@ -124,6 +123,11 @@ class Dashboard extends React.Component {
 
     this.setState({currentMenuItem:currentMenuItem })
   };
+
+  setActiveStatus = (active) =>{
+    console.log('Setting State', active)
+    this.setState({active:active});
+  }
 
   render() {
     const { classes } = this.props;
@@ -146,6 +150,19 @@ class Dashboard extends React.Component {
     var Question4Class = classNames({
         'visible': this.state.currentMenuItem === 5,
         'hidden': this.state.currentMenuItem !== 5
+      });
+    var Question5Class = classNames({
+        'visible': this.state.currentMenuItem === 6,
+        'hidden': this.state.currentMenuItem !== 6
+      });
+    var Question6Class = classNames({
+        'visible': this.state.currentMenuItem === 7,
+        'hidden': this.state.currentMenuItem !== 7
+      });
+    var Progress = classNames({
+        'visible': this.state.active,
+        'hidden': !this.state.active,
+        'progress-bar': true
       });
     return (
       <div className={classes.root}>
@@ -173,13 +190,11 @@ class Dashboard extends React.Component {
               noWrap
               className={classes.title}
             >
-              Dashboard
+              Advance Data Management - Course Work 4 - <i>By: Oneal Anguin</i>
+              <div className={Progress}>
+                <CircularProgress className={Progress} />
+              </div>
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -205,16 +220,22 @@ class Dashboard extends React.Component {
                 <Settings className={classes.content} Neo4JUrl={"bolt://localhost:7687"} User={"neo4j"} Password={"neo4jpass"}/>
           </div>
           <div className={Question1Class}>
-            <Question1/>
+            <Question1 setActiveStatus={this.setActiveStatus}/>
           </div>
           <div className={Question2Class}>
-            <Question2/>
+            <Question2 setActiveStatus={this.setActiveStatus}/>
           </div>
           <div className={Question3Class}>
-            <Question3/>
+            <Question3 setActiveStatus={this.setActiveStatus}/>
           </div>
           <div className={Question4Class}>
-            <Question4/>
+            <Question4 setActiveStatus={this.setActiveStatus}/>
+          </div>
+          <div className={Question5Class}>
+            <Question5 setActiveStatus={this.setActiveStatus}/>
+          </div>
+          <div className={Question6Class}>
+            <Question6 setActiveStatus={this.setActiveStatus}/>
           </div>
         </main>
       </div>

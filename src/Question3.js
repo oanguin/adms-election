@@ -19,9 +19,10 @@ class Question3 extends Component{
     }
 
     componentDidMount(){
+        this.props.setActiveStatus(true);
         GraphClient.GetWinningParty().then(          
             result =>{
-                this.setState({winningParty:result.records[0].get('winningParty')});
+                this.setState({winningParty:result.records[0].get('winningParty')},this.props.setActiveStatus(false));
             }
         )
     }
