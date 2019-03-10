@@ -21,6 +21,9 @@ import Settings from './Settings';
 import AppScss from './App.scss'
 import GraphClient from './GraphClient';
 import Question1 from './Question1';
+import Question2 from './Question2';
+import Question3 from './Question3';
+import Question4 from './Question4';
 
 const drawerWidth = 240;
 
@@ -116,7 +119,8 @@ class Dashboard extends React.Component {
   };
 
   handleOnMenuItemClick = (event) => {
-    const currentMenuItem = parseInt(event.target.parentElement.getAttribute("data-index"));
+    var menuItem = event.target.parentElement.getAttribute("data-index") ? event.target.parentElement : event.target;
+    const currentMenuItem = parseInt(menuItem.getAttribute("data-index"));
 
     this.setState({currentMenuItem:currentMenuItem })
   };
@@ -130,6 +134,18 @@ class Dashboard extends React.Component {
     var Question1Class = classNames({
         'visible': this.state.currentMenuItem === 2,
         'hidden': this.state.currentMenuItem !== 2
+      });
+    var Question2Class = classNames({
+        'visible': this.state.currentMenuItem === 3,
+        'hidden': this.state.currentMenuItem !== 3
+      });
+    var Question3Class = classNames({
+        'visible': this.state.currentMenuItem === 4,
+        'hidden': this.state.currentMenuItem !== 4
+      });
+    var Question4Class = classNames({
+        'visible': this.state.currentMenuItem === 5,
+        'hidden': this.state.currentMenuItem !== 5
       });
     return (
       <div className={classes.root}>
@@ -190,6 +206,15 @@ class Dashboard extends React.Component {
           </div>
           <div className={Question1Class}>
             <Question1/>
+          </div>
+          <div className={Question2Class}>
+            <Question2/>
+          </div>
+          <div className={Question3Class}>
+            <Question3/>
+          </div>
+          <div className={Question4Class}>
+            <Question4/>
           </div>
         </main>
       </div>

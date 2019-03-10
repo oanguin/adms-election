@@ -38,7 +38,7 @@ class GraphClient{
         );
     }
 
-    GetPartWithMostVotesInArea = (ukarea) =>{
+    GetPartyWithMostVotesInArea = (ukarea) =>{
         return this.session.run(
             `MATCH (ukc:Ukconst{ukarea:"${ukarea}"})-[result:Ukresult]->(ukp:Ukparty) with max(result.ukvotes) ` +
             `as maxvotes MATCH (ukc:Ukconst{ukarea:"${ukarea}"})-[result:Ukresult]->(ukp:Ukparty) ` +
@@ -46,6 +46,32 @@ class GraphClient{
         );
         
     }
+
+    GetPartiesContestedInArea = (ukarea) =>{
+        return this.session.run(
+            `MATCH (ukc:Ukconst{ukarea:"${ukarea}"})-[result:Ukresult]->(ukp:Ukparty) RETURN ukp.party, result.ukvotes ORDER BY result.ukvotes DESC`
+        );
+        
+    }
+
+    GetWinningParty = () =>{
+        return this.session.run(
+          "MATCH (ukc:Ukconst)-[result:Ukresult]->(ukp:Ukparty) WITH max(result.ukvotes) as maxvotes, ukc.ukarea as votesinarea " +
+          "MATCH (ukc1:Ukconst)-[result1:Ukresult]->(ukp1:Ukparty) WITH ukp1.party as winningParty WHERE result1.ukvotes = maxvotes " +
+          "RETURN winningParty,count(winningParty) as winningCount ORDER BY winningCount DESC LIMIT 1"
+        );
+    }
+
+    GetPartiesWhomContested = () =>{
+        return this.session.run(
+            "MATCH (ukc:Ukconst)-[result:Ukresult]->(ukp:Ukparty) WITH max(result.ukvotes) as maxvotes, ukc.ukarea as votesinarea " +
+            "MATCH (ukc1:Ukconst)-[result1:Ukresult]->(ukp1:Ukparty) WITH ukp1.party as winningParty WHERE result1.ukvotes = maxvotes " +
+            "WITH collect({party:winningParty}) as winningparties MATCH (ukp:Ukparty) WITH winningparties  + " + 
+            "collect({party:ukp.party}) as allparties UNWIND allparties as party RETURN party.party as party, count(party) -1 as seatswon ORDER BY seatswon DESC"
+        );
+    }
+
+    
 }
 
 export default new GraphClient();

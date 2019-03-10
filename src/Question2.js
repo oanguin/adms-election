@@ -5,12 +5,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core';
 import AppScss from './App.scss';
 import classNames from 'classnames';
-import Button from '@material-ui/core/Button';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
-class Question1 extends Component{
+class Question2 extends Component{
     constructor(props){
         super(props);
-        this.state = {constituencies : [], ukarea:"", winningParty: {}};
+        this.state = {constituencies : [], ukarea:"", parties: []};
     }
 
     componentDidMount(){
@@ -23,20 +28,19 @@ class Question1 extends Component{
 
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value }, () =>{
-            this.GetPartyWithMostVotes();
+            this.GetPartiesContestedInArea();
         });
         
     };
 
-    GetPartyWithMostVotes = () =>{
+    GetPartiesContestedInArea = () =>{
         const {ukarea} = this.state;
         console.log(ukarea)
-        GraphClient.GetPartyWithMostVotesInArea(ukarea).then(
+        GraphClient.GetPartiesContestedInArea(ukarea).then(
             result =>{
-                if( result.records[0]){
-                    //this.state.winningParty = result.records[0].get('ukp');
-                    this.setState({ winningParty: result.records[0].get('ukp')});
-                    console.log("Winner",this.state.winningParty)
+                if( result.records){
+                    this.setState({ parties: result.records});
+                    console.log("Parties",result)
                 }
                 
             }
@@ -44,14 +48,14 @@ class Question1 extends Component{
     };
 
     render(){
-        const {constituencies, ukarea, winningParty} = this.state;
+        const {constituencies, ukarea, parties} = this.state;
         var SelectClass = classNames({
             'selectList': true
           });
         return(        
             <div>
-                <h1>Question 1</h1>
-                <h2><i>Select UK Area to see which party won in that area.</i></h2>
+                <h1>Question 2</h1>
+                <h2><i>Select UK Area to see which parties contested the constituency.</i></h2>
                 <Select 
                 className={SelectClass}
                 value={ukarea}
@@ -70,8 +74,8 @@ class Question1 extends Component{
                 </Select>
 
                 {
-                    (winningParty && winningParty.properties) ?
-                    <WinningPartyDiv winningParty={winningParty}/>
+                    (parties && parties.length > 0) ?
+                    <PartiesDiv parties={parties}/>
                     :<div className="resultsDiv"><h2>Sorry No Results</h2></div>
                 }
             </div>
@@ -79,15 +83,32 @@ class Question1 extends Component{
     }
 }
 
-function WinningPartyDiv(props){
-    const {winningParty} = props;
+function PartiesDiv(props){
+    const {parties} = props;
     return(
         <div className="resultsDiv">
-            <h2>Winning Party</h2>
-            <div>Party: {winningParty.properties.party}</div>
-            <div>Party Leader: {winningParty.properties.leader}</div>        
+        <Paper >
+        <Table>
+            <TableHead>
+            <TableRow>
+                <TableCell>Party</TableCell>
+                <TableCell align="right">Votes</TableCell>
+            </TableRow>
+            </TableHead>
+            <TableBody>
+            {parties.map(party => (
+                <TableRow key={party.get('ukp.party')}>
+                <TableCell component="th" scope="row">
+                    {party.get('ukp.party')}
+                </TableCell>
+                <TableCell align="right">{party.get('result.ukvotes').low}</TableCell>
+                </TableRow>
+            ))}
+            </TableBody>
+        </Table>
+        </Paper>
         </div>
     )
 }
 
-export default Question1;
+export default Question2;
