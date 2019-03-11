@@ -52,7 +52,7 @@ function PartiesDiv(props){
             <TableHead>
             <TableRow>
                 <TableCell>Party</TableCell>
-                <TableCell align="right">Votes</TableCell>
+                <TableCell align="right">Constituencies Won</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>

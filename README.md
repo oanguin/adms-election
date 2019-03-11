@@ -1,4 +1,15 @@
-### `npm start`
+
+ # Oneal Anguin
+ # ID: 13157402
+ ``I have read and understood the sections on plagiarism in the College Policy on assessment offences and confirm that the work is my own, with the work of others clearly acknowledged. I give my permission to submit my work to the plagiarism
+testing database that the College is using and test it using plagiarism detection software, search engines or meta-searching software.``
+
+## Running Application
+1. Open the file `/build/index.html`
+   1. Note that the it works in Firefox and Chrome to run in I.E. set compatability mode to 11.
+      1. [I.E. Compatability Mode](https://www.k-state.edu/its/helpdesk/ie10-enable-compatibility-mode.html)
+
+## `npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -21,18 +32,11 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
 ## Prerequisite
 1. You must have a hosted instance of neo4j database.
 1. For the elections example you have to import into neo4j and change the default database and set it to allow upgade by changing he neo4j.conf.
-1. You also need to run migration script on the election databae.
-1. `./neo4j-admin restore --from='/Users/onealanguin/Documents/Birkbeck/AdvancedDatabase/assignments/four/neo4j/electiondb' --mode=database --database=election.db --force=true`
+1. You also need to run migration script on the election database.
+   1. `./neo4j-admin restore --from='/Users/onealanguin/Documents/Birkbeck/AdvancedDatabase/assignments/four/neo4j/electiondb' --mode=database --database=election.db --force=true`
+
+## Repository
+1. [Source Code](https://github.com/oanguin/adms-election)

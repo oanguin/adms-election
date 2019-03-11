@@ -1,0 +1,141 @@
+Question 1
+Winning Party in Cambridge
+Party: con
+Party Leader: thatcher
+
+Question 2
+Which parties contested the Angus East constituency.
+Party	Votes
+con	19218
+snp	15691
+sdp	4978
+lab	3497
+eco	239
+
+Question 3
+Which Party won the election.
+con
+
+Question 4
+Parties Whom Contested the election and the constituencies they won.
+Party	Votes
+con	409
+lab	213
+lib	22
+sdp	9
+snp	2
+eco	2
+ind	2
+bnp	0
+nf	0
+
+Question 5
+Constituencies where eco pary lost their deposit.
+Area	Percent of Votes
+nuneaton	0
+hammersmith	0
+putney	0.28902173747699234
+tooting	0.35854388999029824
+hornchurch	0.36123115495002145
+dulwich	0.3890795068376209
+bournemouth east	0.3980462200189546
+angus east	0.4079403280591257
+kingston upon thames	0.4215483908480391
+derby south	0.42984296982415515
+lewisham east	0.43226973631546084
+hyndburn	0.43572270999868956
+gainsborough and horncastle	0.44607882324726195
+swansea west	0.45144804088586027
+bradford south	0.4590642839044311
+slough	0.4686576203729072
+enfield north	0.470028348584774
+dundee west	0.4720151294915678
+birkenhead	0.4731418302305338
+fulham	0.4746401644962303
+bristol east	0.47790275985002156
+croydon north west	0.4815463362068966
+keighley	0.4894413561739299
+fife north east	0.4932936524114313
+paisley south	0.507633230308139
+crosby	0.5173724957301186
+battesea	0.5239021678710394
+city of london and westminster south	0.5581457306513921
+fife central	0.564574383150211
+aberdeen north	0.5818562323619875
+cornwall south east	0.5825611948554833
+carmarthen	0.5879301400657099
+cardiff west	0.5980393822525017
+dover	0.6114911908942302
+stockport	0.6155129274395329
+cheltenham	0.6468951732706696
+leicester south	0.6491973559962229
+twickenham	0.6511456477670619
+dunfermline west	0.666127124447488
+warrington south	0.6758343115881268
+huntingdon	0.6783078967872038
+epping forest	0.6795970530747256
+chorley	0.6796672493821208
+batley and spen	0.692357385613572
+hackney north and stoke newington	0.6956029973137282
+westminster north	0.6971729438689791
+gloucester	0.7034187030075187
+st ives	0.7067649805196896
+bath	0.7072407986528747
+pembroke	0.7134541329591928
+gravesham	0.7201256946667054
+antrim north	0.7215422766178705
+ceredigion and pembroke north	0.722402869498173
+edinburgh south	0.7357268981753973
+pontypridd	0.7400570288935405
+south hams	0.7429825442131986
+northavon	0.7526508695455436
+newcastle upon tyne central	0.7561018048371534
+norwich south	0.7593088342662448
+newark	0.7763636668511159
+hereford	0.7809074042840276
+rushcliffe	0.7814621488700481
+rutland and melton	0.7816862088218872
+halesowen and stourbridge	0.7867310109899023
+reading east	0.7943067033976126
+shipley	0.8027363912299894
+peterborough	0.8043950508453233
+walthamstow	0.8191179027490678
+wanstead and woodford	0.8235721577244494
+corby	0.8343659644774886
+plymouth sutton	0.8438970086544331
+chingford	0.8464093864857223
+westbury	0.8511768323363337
+paisley north	0.8560508560508561
+oxford west and abingdon	0.8595897986916538
+loughborough	0.8802371129414217
+bexhill and battle	0.8905957721531559
+birmingham edgbaston	0.9178718181333048
+chipping barnet	0.9295902729829407
+ashford	0.9532585022616854
+milton keynes	0.9601650531661642
+wiltshire north	0.9646576745774287
+altrincham and sale	0.9674988079307216
+hornsey and wood green	1.0118363526498502
+wimbledon	1.0261033831358406
+leeds north west	1.036293364950803
+warwick and leamington	1.0539434409330093
+leicester north west	1.0580097468951424
+leominster	1.1049175447011925
+carshalton and wallington	1.1126481919466882
+bristol west	1.1194077641302818
+kensington	1.1289312552184805
+bridlington	1.1376838287382052
+exeter	1.1465493133950517
+devon north	1.154941735002158
+chichester	1.1626132438019396
+harborough	1.181827559275578
+edinburgh pentlands	1.1837684156112689
+surbiton	1.185124642419289
+bromsgrove	1.2465181058495822
+westmorland and lonsdale	1.253855020092832
+worcestershire south	1.2929039578387902
+horsham	1.368849426563078
+canterbury	1.3871665465032446
+reigate	1.5196266650914139
+ogmore	1.874061758486546
+lewes	1.9605954044029095
