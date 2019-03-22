@@ -40,16 +40,19 @@ class GraphClient{
 
     GetPartyWithMostVotesInArea = (ukarea) =>{
         return this.session.run(
-            `MATCH (ukc:Ukconst{ukarea:"${ukarea}"})-[result:Ukresult]->(ukp:Ukparty) with max(result.ukvotes) ` +
-            `as maxvotes MATCH (ukc:Ukconst{ukarea:"${ukarea}"})-[result:Ukresult]->(ukp:Ukparty) ` +
-            `WHERE maxvotes = result.ukvotes RETURN ukp`
+            'MATCH (ukc:Ukconst{ukarea:{paramUKArea}})-[result:Ukresult]->(ukp:Ukparty) with max(result.ukvotes) ' +
+            'as maxvotes MATCH (ukc:Ukconst{ukarea:{paramUKArea}})-[result:Ukresult]->(ukp:Ukparty) ' +
+            'WHERE maxvotes = result.ukvotes RETURN ukp',
+            {paramUKArea: ukarea}
         );
         
     }
 
     GetPartiesContestedInArea = (ukarea) =>{
         return this.session.run(
-            `MATCH (ukc:Ukconst{ukarea:"${ukarea}"})-[result:Ukresult]->(ukp:Ukparty) RETURN ukp.party, result.ukvotes ORDER BY result.ukvotes DESC`
+            'MATCH (ukc:Ukconst{ukarea:{paramUKArea}})-[result:Ukresult]->(ukp:Ukparty) ' +
+            'RETURN ukp.party, result.ukvotes ORDER BY result.ukvotes DESC',
+            {paramUKArea: ukarea}
         );
         
     }
@@ -73,20 +76,21 @@ class GraphClient{
 
     GetPartiesWhomLostDeposit = (party) =>{
         return this.session.run(
-            `MATCH (ukc:Ukconst)-[result:Ukresult]->(ukp:Ukparty{party:\"${party}\"}) ` + 
-            `WHERE (result.ukvotes/(ukc.ukelectors * 1.0) * 100 < 5) WITH ` +
-            `collect({area:ukc.ukarea,party:ukp.party,votes:result.ukvotes,percentOfVotes:result.ukvotes/(ukc.ukelectors * 1.0) * 100}) as tallies ` +
-            `UNWIND tallies as tally RETURN tally.party as party, tally.percentOfVotes as percentofvotes, tally.area as area ` +
-            `ORDER BY percentofvotes`
+            'MATCH (ukc:Ukconst)-[result:Ukresult]->(ukp:Ukparty{party:{paramParty}}) ' + 
+            'WHERE (result.ukvotes/(ukc.ukelectors * 1.0) * 100 < 5) WITH ' +
+            'collect({area:ukc.ukarea,party:ukp.party,votes:result.ukvotes,percentOfVotes:result.ukvotes/(ukc.ukelectors * 1.0) * 100}) as tallies ' +
+            'UNWIND tallies as tally RETURN tally.party as party, tally.percentOfVotes as percentofvotes, tally.area as area ' +
+            'ORDER BY percentofvotes',
+            {paramParty: party}
         );
     }
 
     GetAllWhomHaveLostDeposit = () =>{
         return this.session.run(
-            `MATCH (ukc:Ukconst)-[result:Ukresult]->(ukp:Ukparty) WHERE (result.ukvotes/(ukc.ukelectors * 1.0) * 100 < 5) ` +
-            `WITH collect({area:ukc.ukarea,party:ukp.party,votes:result.ukvotes,percentOfVotes:result.ukvotes/(ukc.ukelectors * 1.0) * 100}) as tallies ` +
-            `UNWIND tallies as tally RETURN tally.party as party, tally.percentOfVotes as percentofvotes, tally.area as area ` +
-            `ORDER BY party, area, percentofvotes`
+            'MATCH (ukc:Ukconst)-[result:Ukresult]->(ukp:Ukparty) WHERE (result.ukvotes/(ukc.ukelectors * 1.0) * 100 < 5) ' +
+            'WITH collect({area:ukc.ukarea,party:ukp.party,votes:result.ukvotes,percentOfVotes:result.ukvotes/(ukc.ukelectors * 1.0) * 100}) as tallies ' +
+            'UNWIND tallies as tally RETURN tally.party as party, tally.percentOfVotes as percentofvotes, tally.area as area ' +
+            'ORDER BY party, area, percentofvotes'
         );
     }
     

@@ -11,6 +11,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 
 class Question5 extends Component{
     constructor(props){
@@ -29,6 +31,7 @@ class Question5 extends Component{
 
     handleChange = event => {
         this.props.setActiveStatus(true);
+        event.persist();
         this.setState({ [event.target.name]: event.target.value }, () =>{
             this.GetPartiesWhomLostDeposit(event.target.value);
         });
@@ -56,24 +59,25 @@ class Question5 extends Component{
         return(        
             <div>
                 <h1>Question 5</h1>
-                <h2><i>Select UK Area to see which parties lost their deposit.</i></h2>
-                <Select 
-                className={SelectClass}
-                value={party}
-                onChange={this.handleChange}
-                name="party"
-                autoWidth={true}>
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    {parties.map((constituency,index) =>{
-                        const party = constituency.get('p').properties.party
-                        return(
-                            <MenuItem value={party} key={party}>{party}</MenuItem>
-                        )
-                    })}
-                </Select>
-
+                <h2><i>Select Party to see which parties lost their deposit.</i></h2>
+                <FormControl className="form-control">
+                    <InputLabel htmlFor="party">Please Select Party?</InputLabel>
+                    <Select 
+                    className={SelectClass}
+                    value={party}
+                    onChange={this.handleChange}
+                    name="party"
+                    autoWidth={true}
+                    native>
+                        <option value=""/>
+                        {parties.map((constituency,index) =>{
+                            const party = constituency.get('p').properties.party
+                            return(
+                                <option value={party} key={party}>{party}</option>
+                            )
+                        })}
+                    </Select>
+                </FormControl>
                 {
                     (results && results.length > 0) ?
                     <PartiesDiv parties={results}/>

@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import GraphClient from './GraphClient';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import { withStyles } from '@material-ui/core';
-import AppScss from './App.scss';
 import classNames from 'classnames';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import ConstituencySelect from './ConstituencySelect'
 
 class Question2 extends Component{
     constructor(props){
@@ -58,23 +55,7 @@ class Question2 extends Component{
             <div>
                 <h1>Question 2</h1>
                 <h2><i>Select UK Area to see which parties contested the constituency.</i></h2>
-                <Select 
-                className={SelectClass}
-                value={ukarea}
-                onChange={this.handleChange}
-                name="ukarea"
-                autoWidth={true}>
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    {constituencies.map((constituency,index) =>{
-                        const ukarea = constituency.get('c.ukarea')
-                        return(
-                            <MenuItem value={ukarea} key={ukarea}>{ukarea}</MenuItem>
-                        )
-                    })}
-                </Select>
-
+                <ConstituencySelect constituencies={constituencies} ukarea={ukarea} handleChange={this.handleChange} SelectClass={SelectClass}/>
                 {
                     (parties && parties.length > 0) ?
                     <PartiesDiv parties={parties}/>

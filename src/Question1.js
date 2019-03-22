@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import GraphClient from './GraphClient';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import { withStyles } from '@material-ui/core';
-import AppScss from './App.scss';
 import classNames from 'classnames';
-import Button from '@material-ui/core/Button';
+import ConstituencySelect from './ConstituencySelect'
 
 class Question1 extends Component{
     constructor(props){
@@ -25,7 +21,6 @@ class Question1 extends Component{
     }
 
     handleChange = event => {
-        this.props.setActiveStatus(true);
         this.setState({ [event.target.name]: event.target.value }, () =>{
             this.GetPartyWithMostVotes();
         });
@@ -34,6 +29,10 @@ class Question1 extends Component{
 
     GetPartyWithMostVotes = () =>{
         const {ukarea} = this.state;
+        if(!ukarea){
+            return;
+        }
+        this.props.setActiveStatus(true);
         GraphClient.GetPartyWithMostVotesInArea(ukarea).then(
             result =>{
                 if( result.records[0]){
@@ -53,23 +52,7 @@ class Question1 extends Component{
             <div>
                 <h1>Question 1</h1>
                 <h2><i>Select UK Area to see which party won in that area.</i></h2>
-                <Select 
-                className={SelectClass}
-                value={ukarea}
-                onChange={this.handleChange}
-                name="ukarea"
-                autoWidth={true}>
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    {constituencies.map((constituency,index) =>{
-                        const ukarea = constituency.get('c.ukarea')
-                        return(
-                            <MenuItem value={ukarea} key={ukarea}>{ukarea}</MenuItem>
-                        )
-                    })}
-                </Select>
-
+                <ConstituencySelect constituencies={constituencies} ukarea={ukarea} handleChange={this.handleChange} SelectClass={SelectClass}/>
                 {
                     (winningParty && winningParty.properties) ?
                     <WinningPartyDiv winningParty={winningParty}/>

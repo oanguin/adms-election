@@ -4,10 +4,16 @@
  ``I have read and understood the sections on plagiarism in the College Policy on assessment offences and confirm that the work is my own, with the work of others clearly acknowledged. I give my permission to submit my work to the plagiarism
 testing database that the College is using and test it using plagiarism detection software, search engines or meta-searching software.``
 
+## Key Points about Application
+1. The source code for the Cyper Queries can be found in the `src/GraphClient.js` file.
+
 ## Running Application
 1. Open the file `/build/index.html`
    1. Note that the it works in Firefox and Chrome to run in I.E. set compatability mode to 11.
       1. [I.E. Compatability Mode](https://www.k-state.edu/its/helpdesk/ie10-enable-compatibility-mode.html)
+
+## `npm install`
+This will download all the dependencies for the project.
 
 ## `npm start`
 
@@ -33,10 +39,12 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ## Prerequisite
+1. To build you need `Node v10.11.0`
 1. You must have a hosted instance of neo4j database.
 1. For the elections example you have to import into neo4j and change the default database and set it to allow upgade by changing he neo4j.conf.
 1. You also need to run migration script on the election database.
    1. `./neo4j-admin restore --from='/Users/onealanguin/Documents/Birkbeck/AdvancedDatabase/assignments/four/neo4j/electiondb' --mode=database --database=election.db --force=true`
+1. You can run the neo4j instance with the following command from the command line. `./neo4j start`. You must be in the bin directory of the neo4j server folder.
 
 ## Repository
 1. [Source Code](https://github.com/oanguin/adms-election)
